@@ -12,6 +12,7 @@ Smart guides will be added to this selector.
 <h4>guideClass: 'string'.</h4> 
 Custom class for smart guides
 
+
 You can see how it works on <a href="illat.net">illat.net/smartguides</a>
 
 Thanks to Alexander Polomoshnov for his "jQuery UI Resizable Snap".
