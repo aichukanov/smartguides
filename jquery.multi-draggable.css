@@ -1,0 +1,16 @@
+﻿
+.ui-draggable-container {
+    position: absolute;
+    outline: 1px dashed #cccccc;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    opacity: 0.9;
+}
+
+.ui-draggable-clone {
+	display: block !important;
+}
+
+.ui-draggable-hidden {
+	display: none;
+}

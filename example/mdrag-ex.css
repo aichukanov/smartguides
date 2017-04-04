@@ -1,0 +1,66 @@
+﻿
+body {
+    font-family: Verdana;
+    text-align: center;
+}
+
+.part {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.container {
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+    min-width: 400px;
+    border: 1px solid #ddd;
+    height: 250px;
+    position: relative;
+}
+
+.drag {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    background-color: #ffffc8;
+    cursor: pointer;
+    position: absolute;
+}
+        
+.drag.selected {
+    background-color: #b6f3b6;
+}
+
+.container:after {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #999;
+}
+
+#c1:after {
+    content: 'Multidraggable';
+}
+#c2:after {
+    content: 'Multidraggable with clone';
+}
+#c3:after {
+    content: 'Multidraggable with snap';
+}
+
+#c2 .ui-draggable-container {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+#c3 .ui-draggable-container {
+    background-color: rgba(255, 0, 0, 0.5);
+    opacity: 1;
+    outline: 2px solid yellow;
+}
+
+pre {
+    white-space: pre-wrap;
+}

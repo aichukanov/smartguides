@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="../jquery.multi-draggable.css"> -->
+    <link rel="stylesheet" href="../i-guides.css">
+    <link rel="stylesheet" href="mdrag-ex.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../jquery.ui.resizable.snap.ext.js"></script>
+    <!-- <script src="../jquery.multi-draggable.js"></script> -->
+    <script src="../i-guides.js"></script>
+    <script src="../jquery.draggable.iguides.js"></script>
+    <script src="../jquery.resizable.iguides.js"></script>
+    <script src="mdrag-ex.js"></script>
+</head>
+<body>fasfdsafs
+    <div class="part">
+        <div id="c1" class="container">
+            <div class="drag"></div>
+            <div class="drag"></div>
+            <div class="drag"></div>
+            <div class="drag"></div>
+        </div>
+
+        <div class="container">
+<pre>
+    $('.container .drag')&#8203;.draggable({
+        containment: &#8203;"parent",
+        <mark>multiple: &#8203;true,</mark>
+        <mark>selected: &#8203;'.selected',</mark>
+        beforeStart: &#8203;function () {
+            var $this = &#8203;$(this);
+            if (!$this&#8203;.hasClass('selected')) &#8203;{
+                $this&#8203;.siblings('.selected')
+                    .removeClass('selected');
+                $this&#8203;.addClass('selected');
+            }
+        }
+    });
+</pre>
+        </div>
+
+        <div class="container">
+<pre>
+    .container {
+        position: relative;
+    }
+    .drag {
+        position: absolute;
+    }
+</pre>
+        </div>
+    </div>
+    <div class="part">
+        <div id="c2" class="container">
+            <div class="drag"></div>
+            <div class="drag"></div>
+            <div class="drag"></div>
+            <div class="drag"></div>
+        </div>
+
+        <div class="container">
+<pre>
+    $('.container .drag').draggable({
+        containment: "parent",
+        multiple: true,
+        selected: '.selected',
+        <mark>helper: 'clone',</mark>                
+        beforeStart: &#8203;function () {
+            var $this = &#8203;$(this);
+            if (!$this&#8203;.hasClass('selected')) &#8203;{
+                $this&#8203;.siblings('.selected')
+                    .removeClass('selected');
+                $this&#8203;.addClass('selected');
+            }
+        }
+    });
+</pre>
+        </div>
+        <div class="container">
+<pre>
+    .container {
+        position: relative;
+    }
+    .drag {
+        position: absolute;
+    }   
+    <mark>.ui-draggable-container {</mark>
+        <mark>background-color: rgba(255, 0, 0, 0.5);</mark>
+    <mark>}</mark>
+</pre>
+        </div>
+    </div>
+    <div class="part">
+
+        <div id="c3" class="container">
+            <div class="drag"></div>
+            <div class="drag"></div>
+            <div class="drag"></div>
+            <div class="drag"></div>
+        </div>
+
+        <div class="container">
+<pre>
+    $('.container .drag').draggable({
+        containment: "parent",
+        multiple: true,
+        selected: '.selected',
+        <mark>snap: '.drag',</mark>                
+        beforeStart: &#8203;function () {
+            var $this = &#8203;$(this);
+            if (!$this&#8203;.hasClass('selected')) &#8203;{
+                $this&#8203;.siblings('.selected')
+                    .removeClass('selected');
+                $this&#8203;.addClass('selected');
+            }
+        }
+    });
+</pre>
+        </div>
+
+        <div class="container">
+<pre>                
+    .container {
+        position: relative;
+    }
+    .drag {
+        position: absolute;
+    }
+    .ui-draggable-container {                
+        background-color: rgba(255, 0, 0, 0.5);
+        <mark>opacity: 1;</mark>
+        <mark>outline: 2px solid yellow;   </mark>             
+    }
+</pre>
+        </div>
+    </div>
+</body>
+</html>
