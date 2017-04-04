@@ -11,10 +11,10 @@
         this._trigger("beforeStart", event);
         oldMouseStart.apply(this, [event, overrideHandle, noActivation]);
     };
-    
+    var defaultGuideClass = 'i-guide';
     $.extend($.ui.resizable.prototype.options, {
         appendGuideTo: ':not(.selected):visible',
-        guideClass: 'i-guide',
+        guideClass: defaultGuideClass,
         iGuides: false
     });
 
@@ -26,6 +26,9 @@
                 settings = inst.options;
 
             if (inst.options.iGuides == true) {
+                if (settings.guideClass.indexOf(defaultGuideClass) < 0) {
+                    settings.guideClass += ' ' + defaultGuideClass;
+                }
                 var snapAdd = settings.guideClass.replace(/^|\s/g, '.');
                 settings.snap = settings.snap ? settings.snap + ', ' + snapAdd : snapAdd;
                 settings.snapMode = 'outer'; // doesn't work with 'inner'

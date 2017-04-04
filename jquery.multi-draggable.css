@@ -8,9 +8,9 @@
 }
 
 .ui-draggable-clone {
-	display: block !important;
+	visibility: visible !important;
 }
 
 .ui-draggable-hidden {
-	display: none;
+	visibility: hidden;
 }

@@ -22,7 +22,6 @@
     var opts = {
         containment: "parent",
         iGuides: true,
-        guideClass: 'guide',
         snapTolerance: 10,
         snap: ".i-guide",
         appendGuideTo: '#c1 .drag:not(".selected")',
@@ -33,42 +32,35 @@
                 $this.addClass('selected');
             }
         }
-    }
-    $('.drag')
-        .draggable($.extend(opts, {
-            //multiple: true
+    };
+
+    $('#c1 .drag')
+        .draggable($.extend({}, opts))
+        .resizable($.extend({ 
+            handles: 'all' 
+        }, opts ));
+
+    var opts2 = $.extend({}, opts, {
+        appendGuideTo: '#c2 .drag:not(".selected")',
+        guideClass: 'guide'
+    });
+    // with custom class
+    $('#c2 .drag')
+        .draggable($.extend(opts2, {
+            multiple: true,
+            selected: '#c2 .selected'
         }))
-        .resizable($.extend(opts, {
+        .resizable($.extend(opts2, {
             handles: 'all'
         }));
 
-    // with custom class
-    // $('#c2 .drag').draggable({
-    //     containment: "parent",
-    //     multiple: true,
-    //     selected: '#c2 .selected',
-    //     helper: 'clone',
-    //     beforeStart: function () {
-    //         var $this = $(this);
-    //         if (!$this.hasClass('selected')) {
-    //             $this.siblings('.selected').removeClass('selected');
-    //             $this.addClass('selected');
-    //         }
-    //     }
-    // });
+    var opts3 = $.extend({}, opts, {
+        appendGuideTo: '#c3 .drag:not(".selected")'
+    });
 
-    // // with snap
-    // $('#c3 .drag').draggable({
-    //     containment: "parent",
-    //     multiple: true,
-    //     selected: '#c3 .selected',
-    //     snap: '#c3 .drag',
-    //     beforeStart: function () {
-    //         var $this = $(this);
-    //         if (!$this.hasClass('selected')) {
-    //             $this.siblings('.selected').removeClass('selected');
-    //             $this.addClass('selected');
-    //         }
-    //     }
-    // });
+    $('#c3 .drag')
+        .draggable(opts3)
+        .resizable($.extend(opts3, {
+            handles: 'all'
+        }));
 });
