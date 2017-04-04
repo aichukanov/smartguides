@@ -21,9 +21,8 @@
 
     var opts = {
         containment: "parent",
-        iGuides: true,
+        smartGuides: true,
         snapTolerance: 10,
-        snap: ".i-guide",
         appendGuideTo: '#c1 .drag:not(".selected")',
         beforeStart: function () {
             var $this = $(this);
@@ -42,7 +41,6 @@
 
     var opts2 = $.extend({}, opts, {
         appendGuideTo: '#c2 .drag:not(".selected")',
-        guideClass: 'guide'
     });
     // with custom class
     $('#c2 .drag')
@@ -55,7 +53,9 @@
         }));
 
     var opts3 = $.extend({}, opts, {
-        appendGuideTo: '#c3 .drag:not(".selected")'
+        appendGuideTo: '#c3 .drag:not(".selected")',
+        snap: '.snap-container',
+        guideClass: 'guide'
     });
 
     $('#c3 .drag')

@@ -5,19 +5,19 @@
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="../jquery.multi-draggable.css">
-    <link rel="stylesheet" href="../i-guides.css">
+    <link rel="stylesheet" href="../smart-guides.css">
     <link rel="stylesheet" href="mdrag-ex.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../jquery.ui.resizable.snap.ext.js"></script>
     <script src="../jquery.multi-draggable.js"></script>
-    <script src="../i-guides.js"></script>
-    <script src="../jquery.draggable.iguides.js"></script>
-    <script src="../jquery.resizable.iguides.js"></script>
+    <script src="../smart-guides.js"></script>
+    <script src="../jquery.draggable.smartguides.js"></script>
+    <script src="../jquery.resizable.smartguides.js"></script>
     <script src="mdrag-ex.js"></script>
 </head>
-<body>fasfdsafs
+<body>
     <div class="part">
         <div id="c1" class="container">
             <div class="drag"></div>
@@ -26,25 +26,28 @@
             <div class="drag"></div>
         </div>
 
-        <div class="container">
+        <div class="container code">
 <pre>
-    $('.container .drag')&#8203;.draggable({
-        containment: &#8203;"parent",
-        <mark>multiple: &#8203;true,</mark>
-        <mark>selected: &#8203;'.selected',</mark>
-        beforeStart: &#8203;function () {
-            var $this = &#8203;$(this);
-            if (!$this&#8203;.hasClass('selected')) &#8203;{
-                $this&#8203;.siblings('.selected')
-                    .removeClass('selected');
-                $this&#8203;.addClass('selected');
+    var opts = {
+        containment: "parent",
+        <mark>smartGuides: true,</mark>  
+        <mark>appendGuideTo: '.drag:not(".selected")',</mark>  
+        snapTolerance: 10,
+        beforeStart: function () {
+            var $this = $(this);
+            if (!$this.hasClass('selected')) {
+                $this.siblings('.selected').removeClass('selected');
+                $this.addClass('selected');
             }
         }
-    });
+    };
+    $('.container .drag')
+        .draggable(opts)
+        .resizable($.extend({ handles: 'all' }, opts ));
 </pre>
         </div>
 
-        <div class="container">
+        <div class="container code">
 <pre>
     .container {
         position: relative;
@@ -63,34 +66,40 @@
             <div class="drag"></div>
         </div>
 
-        <div class="container">
+        <div class="container code">
 <pre>
-    $('.container .drag').draggable({
+    var opts = {
         containment: "parent",
-        multiple: true,
-        selected: '.selected',
-        <mark>helper: 'clone',</mark>                
-        beforeStart: &#8203;function () {
-            var $this = &#8203;$(this);
-            if (!$this&#8203;.hasClass('selected')) &#8203;{
-                $this&#8203;.siblings('.selected')
-                    .removeClass('selected');
-                $this&#8203;.addClass('selected');
+        smartGuides: true,
+        appendGuideTo: '.drag:not(".selected")'
+        snapTolerance: 10,
+        beforeStart: function () {
+            var $this = $(this);
+            if (!$this.hasClass('selected')) {
+                $this.siblings('.selected').removeClass('selected');
+                $this.addClass('selected');
             }
         }
-    });
+    };
+    $('.container .drag')
+        .draggable($.extend({
+            <mark>multiple: true,</mark>
+            <mark>selected: '.selected'</mark>
+        }, opts))
+        .resizable($.extend({ handles: 'all' }, opts ));
 </pre>
         </div>
-        <div class="container">
+        <div class="container code">
 <pre>
     .container {
         position: relative;
     }
     .drag {
         position: absolute;
-    }   
-    <mark>.ui-draggable-container {</mark>
-        <mark>background-color: rgba(255, 0, 0, 0.5);</mark>
+    }
+    <mark>.smart-guide {</mark>
+        <mark>border-color: black;</mark>
+        <mark>border-style: dashed;</mark>
     <mark>}</mark>
 </pre>
         </div>
@@ -98,28 +107,33 @@
     <div class="part">
 
         <div id="c3" class="container">
+            <div class="snap-container"></div>
             <div class="drag"></div>
             <div class="drag"></div>
             <div class="drag"></div>
             <div class="drag"></div>
         </div>
 
-        <div class="container">
+        <div class="container code">
 <pre>
-    $('.container .drag').draggable({
+    var opts = {
         containment: "parent",
-        multiple: true,
-        selected: '.selected',
-        <mark>snap: '.drag',</mark>                
-        beforeStart: &#8203;function () {
-            var $this = &#8203;$(this);
-            if (!$this&#8203;.hasClass('selected')) &#8203;{
-                $this&#8203;.siblings('.selected')
-                    .removeClass('selected');
-                $this&#8203;.addClass('selected');
+        smartGuides: true,
+        appendGuideTo: '.drag:not(".selected")'
+        <mark>guideClass: 'guide',</mark>
+        <mark>snap: '.snap-container',</mark>
+        snapTolerance: 10,
+        beforeStart: function () {
+            var $this = $(this);
+            if (!$this.hasClass('selected')) {
+                $this.siblings('.selected').removeClass('selected');
+                $this.addClass('selected');
             }
         }
-    });
+    };
+    $('.container .drag')
+        .draggable(opts)
+        .resizable($.extend({ handles: 'all' }, opts ));
 </pre>
         </div>
 
@@ -131,11 +145,10 @@
     .drag {
         position: absolute;
     }
-    .ui-draggable-container {                
-        background-color: rgba(255, 0, 0, 0.5);
-        <mark>opacity: 1;</mark>
-        <mark>outline: 2px solid yellow;   </mark>             
-    }
+    <mark>.guide {</mark>
+        <mark>border-color: blue;</mark>
+        <mark>border-style: dotted;</mark>
+    <mark>}</mark>
 </pre>
         </div>
     </div>

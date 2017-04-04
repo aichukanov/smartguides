@@ -1,5 +1,5 @@
 ﻿
-.i-guide {
+.smart-guide {
     position: absolute;
     border-color: #ff4aff;
     border-style: solid;
@@ -10,11 +10,11 @@
     min-width: 1px;
 
 }
-    .i-guide.guide-x {
+    .smart-guide.guide-x {
         height: 1px;
         border-top-width: 1px;
     }
-    .i-guide.guide-y {
+    .smart-guide.guide-y {
         width: 1px;
         border-left-width: 1px;
     }

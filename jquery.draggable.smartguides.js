@@ -13,21 +13,22 @@
         oldMouseStart.apply(this, [event, overrideHandle, noActivation]);
     };
     
-    var defaultGuideClass = 'i-guide';
+    var defaultGuideClass = 'smart-guide';
     $.extend($.ui.draggable.prototype.options, {
         appendGuideTo: ':not(.selected):visible',
         guideClass: defaultGuideClass,
-        iGuides: false
+        snap: '.' + defaultGuideClass,
+        smartGuides: false
     });
 
-	var iGuides;
-    $.ui.plugin.add('draggable', 'iGuides', {
+	var smartGuides;
+    $.ui.plugin.add('draggable', 'smartGuides', {
 		prepare: function (evt) {
             var $this = $(this),
                 inst = $this.data('ui-draggable'),
                 settings = inst.options;
 
-            if (inst.options.iGuides == true) {
+            if (inst.options.smartGuides == true) {
                 if (settings.guideClass.indexOf(defaultGuideClass) < 0) {
                     settings.guideClass += ' ' + defaultGuideClass;
                 }
@@ -35,7 +36,7 @@
     	        settings.snap = settings.snap ? settings.snap + ', ' + snapAdd : snapAdd;
                 settings.snapMode = 'outer'; // doesn't work with 'inner'
 
-    		    iGuides = new IGuides({
+    		    smartGuides = new SmartGuides({
     		        tolerance: settings.snapTolerance,
     		        guideClass: settings.guideClass,
                     appendGuideTo: inst.options.appendGuideTo
@@ -46,8 +47,8 @@
             var $this = $(this),
                 inst = $this.data('ui-draggable');
 
-            if (inst.options.iGuides == true) {
-                iGuides.defineElementPositions();
+            if (inst.options.smartGuides == true) {
+                smartGuides.defineElementPositions();
             }
         },
         drag: function (evt, ui) {
@@ -55,11 +56,11 @@
                 inst = $(this).data('ui-draggable');
 
             // snap fields
-            if (inst.options.iGuides == true && !evt.ctrlKey) {
-                iGuides.addGuides($this);
+            if (inst.options.smartGuides == true && !evt.ctrlKey) {
+                smartGuides.addGuides($this);
 
-                if (iGuides.mockGuides.length > 0) {
-                    $.each(iGuides.getClosestGuides($this), function () {
+                if (smartGuides.mockGuides.length > 0) {
+                    $.each(smartGuides.getClosestGuides($this), function () {
                         var mockGuide = $(this),
                             mockOffset = mockGuide.offset();
 
@@ -75,15 +76,15 @@
                 }
             }
             else {
-                iGuides.clear();
+                smartGuides.clear();
             }
         },
         stop: function (evt, ui) {
             var $this = $(this),
                 inst = $this.data('ui-draggable');
 
-            if (inst.options.iGuides == true) {
-                iGuides.clear();
+            if (inst.options.smartGuides == true) {
+                smartGuides.clear();
             }
         }
     });

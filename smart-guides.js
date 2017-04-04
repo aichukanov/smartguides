@@ -1,5 +1,5 @@
 ﻿
-var IGuides = function (params) {
+var SmartGuides = function (params) {
     var self = this;
     self.elementPositions = [];
     self.mockGuides = [];
@@ -16,7 +16,7 @@ var IGuides = function (params) {
     }
 };
 
-IGuides.prototype.defineElementPositions = function (elements) {
+SmartGuides.prototype.defineElementPositions = function (elements) {
     var self = this;
     self.elementPositions = [];
 
@@ -25,11 +25,11 @@ IGuides.prototype.defineElementPositions = function (elements) {
     }
 
     $.each(elements, function () {
-        self.elementPositions.push(IGuides.getRect($(this)));
+        self.elementPositions.push(SmartGuides.getRect($(this)));
     });
 }
 
-IGuides.prototype.addGuides = function (element, directionObj) {
+SmartGuides.prototype.addGuides = function (element, directionObj) {
     var self = this;
     self.clear();
 
@@ -46,7 +46,7 @@ IGuides.prototype.addGuides = function (element, directionObj) {
     }
 
     var container = element.parent();
-    var rect = IGuides.getRect(element);
+    var rect = SmartGuides.getRect(element);
     for (var i = 0, lng = self.elementPositions.length; i < lng; i++) {
         var otherRect = self.elementPositions[i];
         var nearResults = self.near(rect, otherRect, directionObj);
@@ -85,15 +85,15 @@ IGuides.prototype.addGuides = function (element, directionObj) {
     return self.mockGuides;
 }
 
-IGuides.prototype.near = function (rect, otherRect, directionObj) {
-    return IGuides.near.call(this, rect, otherRect, directionObj);
+SmartGuides.prototype.near = function (rect, otherRect, directionObj) {
+    return SmartGuides.near.call(this, rect, otherRect, directionObj);
 }
 
-IGuides.prototype.getClosestGuides = function (el, directionObj) {
-    return IGuides.getClosestGuides.call(this, el, this.mockGuides, directionObj);
+SmartGuides.prototype.getClosestGuides = function (el, directionObj) {
+    return SmartGuides.getClosestGuides.call(this, el, this.mockGuides, directionObj);
 }
 
-IGuides.prototype.clear = function () {
+SmartGuides.prototype.clear = function () {
     $.each(this.mockGuides, function () {
         $(this).remove();
     });
@@ -101,7 +101,7 @@ IGuides.prototype.clear = function () {
 }
 
 /* static */
-IGuides.getRect = function (element) {
+SmartGuides.getRect = function (element) {
     var left = parseFloat(element.css('left')),
         top = parseFloat(element.css('top')),
         width = parseFloat(getComputedStyle(element.get(0)).width),
@@ -117,7 +117,7 @@ IGuides.getRect = function (element) {
     };
 };
 
-IGuides.near = function (rect, otherRect, directionObj) {
+SmartGuides.near = function (rect, otherRect, directionObj) {
     var tolerance = this.tolerance || 5,
         result = [],
         opposites = { left: 'right', right: 'left', top: 'bottom', bottom: 'top' };
@@ -142,7 +142,7 @@ IGuides.near = function (rect, otherRect, directionObj) {
     }
     return result;
 }
-IGuides.getClosestGuides = function (el, mockGuides, directionObj) {
+SmartGuides.getClosestGuides = function (el, mockGuides, directionObj) {
     var self = this,
         hClass = self.hClass || 'guide-x',
         vClass = self.vClass || 'guide-y';
@@ -156,7 +156,7 @@ IGuides.getClosestGuides = function (el, mockGuides, directionObj) {
         maxLeft = Number.MIN_SAFE_INTEGER, maxTop = Number.MIN_SAFE_INTEGER,
         vGuides = [], hGuides = [];
 
-    var coords = IGuides.getRect(el);
+    var coords = SmartGuides.getRect(el);
 
     $.each(mockGuides, function () {
         var $this = $(this),

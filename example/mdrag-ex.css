@@ -16,8 +16,38 @@ body {
     width: 30%;
     min-width: 400px;
     border: 1px solid #ddd;
-    height: 250px;
+    height: 300px;
     position: relative;
+}
+
+.container:after {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #999;
+}
+
+.container.code {
+    overflow-y: auto;
+}
+
+.snap-container {
+    height: 20px;
+    width: 100%;
+    background-color: darkgrey;
+    margin-top: 25px;
+    position: absolute;
+}
+.snap-container:after {
+    display: block;
+    content: 'snap-container';
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    line-height: 20px;
 }
 
 .drag {
@@ -33,34 +63,27 @@ body {
     background-color: #b6f3b6;
 }
 
-.container:after {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: #999;
-}
-
 #c1:after {
-    content: 'Multidraggable';
+    content: 'Smart guides';
 }
 #c2:after {
-    content: 'Multidraggable with clone';
+    content: 'Smart guides + Multidraggable';
 }
 #c3:after {
-    content: 'Multidraggable with snap';
+    content: 'Smart guides with custom class + snap without guides';
 }
 
-#c2 .ui-draggable-container {
-    background-color: rgba(255, 0, 0, 0.5);
+#c2 .smart-guide {
+    border-color: black;
+    border-style: dashed;
 }
 
-#c3 .ui-draggable-container {
-    background-color: rgba(255, 0, 0, 0.5);
-    opacity: 1;
-    outline: 2px solid yellow;
+#c3 .guide {
+    border-color: blue;
+    border-style: dotted;
 }
 
 pre {
     white-space: pre-wrap;
+    margin: 2px 5px;
 }

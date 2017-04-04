@@ -11,21 +11,22 @@
         this._trigger("beforeStart", event);
         oldMouseStart.apply(this, [event, overrideHandle, noActivation]);
     };
-    var defaultGuideClass = 'i-guide';
+    var defaultGuideClass = 'smart-guide';
     $.extend($.ui.resizable.prototype.options, {
         appendGuideTo: ':not(.selected):visible',
         guideClass: defaultGuideClass,
-        iGuides: false
+        snap: '.' + defaultGuideClass,
+        smartGuides: false
     });
 
-    var iGuides;
-    $.ui.plugin.add('resizable', 'iGuides', {
+    var smartGuides;
+    $.ui.plugin.add('resizable', 'smartGuides', {
         start: function (evt, ui) {
             var $this = $(this),
                 inst = $this.data('ui-resizable'),
                 settings = inst.options;
 
-            if (inst.options.iGuides == true) {
+            if (inst.options.smartGuides == true) {
                 if (settings.guideClass.indexOf(defaultGuideClass) < 0) {
                     settings.guideClass += ' ' + defaultGuideClass;
                 }
@@ -33,13 +34,13 @@
                 settings.snap = settings.snap ? settings.snap + ', ' + snapAdd : snapAdd;
                 settings.snapMode = 'outer'; // doesn't work with 'inner'
 
-                iGuides = new IGuides({
+                smartGuides = new SmartGuides({
                     tolerance: settings.snapTolerance,
                     guideClass: settings.guideClass,
                     appendGuideTo: settings.appendGuideTo
                 });
 
-                iGuides.defineElementPositions();
+                smartGuides.defineElementPositions();
             }
         },
         resize: function (evt, ui) {
@@ -47,12 +48,12 @@
             var $this = ui.helper,
                 inst = $(this).data('ui-resizable');
 
-            if (inst.options.iGuides == true && !evt.ctrlKey) {
+            if (inst.options.smartGuides == true && !evt.ctrlKey) {
                 var directionObj = getDirection(ui, true);
-                iGuides.addGuides($this, directionObj);
+                smartGuides.addGuides($this, directionObj);
                 
-                if (iGuides.mockGuides.length > 0) {
-                    $.each(iGuides.getClosestGuides($this, directionObj), function () {
+                if (smartGuides.mockGuides.length > 0) {
+                    $.each(smartGuides.getClosestGuides($this, directionObj), function () {
                         var mockGuide = $(this),
                             mockPosition = mockGuide.position(),
                             l = mockPosition.left + (parseInt(mockGuide.css('margin-left'), 10) || 0),
@@ -67,15 +68,15 @@
                 }
             }            
             else {
-                iGuides.clear();
+                smartGuides.clear();
             }
         },
         stop: function (evt, ui) {
             var $this = $(this),
                 inst = $this.data('ui-resizable');
 
-            if (inst.options.iGuides == true) {
-                iGuides.clear();
+            if (inst.options.smartGuides == true) {
+                smartGuides.clear();
             }
         }
     });
