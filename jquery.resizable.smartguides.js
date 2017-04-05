@@ -13,7 +13,6 @@
     };
     var defaultGuideClass = 'smart-guide';
     $.extend($.ui.resizable.prototype.options, {
-        appendGuideTo: ':not(.selected):visible',
         guideClass: defaultGuideClass,
         snap: '.' + defaultGuideClass,
         smartGuides: false
@@ -26,7 +25,7 @@
                 inst = $this.data('ui-resizable'),
                 settings = inst.options;
 
-            if (inst.options.smartGuides == true) {
+            if (inst.options.smartGuides) {
                 if (settings.guideClass.indexOf(defaultGuideClass) < 0) {
                     settings.guideClass += ' ' + defaultGuideClass;
                 }
@@ -37,7 +36,7 @@
                 smartGuides = new SmartGuides({
                     tolerance: settings.snapTolerance,
                     guideClass: settings.guideClass,
-                    appendGuideTo: settings.appendGuideTo
+                    appendGuideTo: settings.smartGuides
                 });
 
                 smartGuides.defineElementPositions();
@@ -48,7 +47,7 @@
             var $this = ui.helper,
                 inst = $(this).data('ui-resizable');
 
-            if (inst.options.smartGuides == true && !evt.ctrlKey) {
+            if (inst.options.smartGuides && !evt.ctrlKey) {
                 var directionObj = getDirection(ui, true);
                 smartGuides.addGuides($this, directionObj);
                 
@@ -75,7 +74,7 @@
             var $this = $(this),
                 inst = $this.data('ui-resizable');
 
-            if (inst.options.smartGuides == true) {
+            if (inst.options.smartGuides) {
                 smartGuides.clear();
             }
         }

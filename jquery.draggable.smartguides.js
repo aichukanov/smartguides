@@ -15,7 +15,6 @@
     
     var defaultGuideClass = 'smart-guide';
     $.extend($.ui.draggable.prototype.options, {
-        appendGuideTo: ':not(.selected):visible',
         guideClass: defaultGuideClass,
         snap: '.' + defaultGuideClass,
         smartGuides: false
@@ -28,7 +27,7 @@
                 inst = $this.data('ui-draggable'),
                 settings = inst.options;
 
-            if (inst.options.smartGuides == true) {
+            if (inst.options.smartGuides) {
                 if (settings.guideClass.indexOf(defaultGuideClass) < 0) {
                     settings.guideClass += ' ' + defaultGuideClass;
                 }
@@ -39,7 +38,7 @@
     		    smartGuides = new SmartGuides({
     		        tolerance: settings.snapTolerance,
     		        guideClass: settings.guideClass,
-                    appendGuideTo: inst.options.appendGuideTo
+                    appendGuideTo: inst.options.smartGuides
     		    });
             }
 		},
@@ -47,7 +46,7 @@
             var $this = $(this),
                 inst = $this.data('ui-draggable');
 
-            if (inst.options.smartGuides == true) {
+            if (inst.options.smartGuides) {
                 smartGuides.defineElementPositions();
             }
         },
@@ -56,7 +55,7 @@
                 inst = $(this).data('ui-draggable');
 
             // snap fields
-            if (inst.options.smartGuides == true && !evt.ctrlKey) {
+            if (inst.options.smartGuides && !evt.ctrlKey) {
                 smartGuides.addGuides($this);
 
                 if (smartGuides.mockGuides.length > 0) {
@@ -83,7 +82,7 @@
             var $this = $(this),
                 inst = $this.data('ui-draggable');
 
-            if (inst.options.smartGuides == true) {
+            if (inst.options.smartGuides) {
                 smartGuides.clear();
             }
         }

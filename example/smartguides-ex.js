@@ -21,9 +21,8 @@
 
     var opts = {
         containment: "parent",
-        smartGuides: true,
         snapTolerance: 10,
-        appendGuideTo: '#c1 .drag:not(".selected")',
+        smartGuides: '#c1 .drag:not(".selected")',
         beforeStart: function () {
             var $this = $(this);
             if (!$this.hasClass('selected')) {
@@ -40,7 +39,7 @@
         }, opts ));
 
     var opts2 = $.extend({}, opts, {
-        appendGuideTo: '#c2 .drag:not(".selected")',
+        smartGuides: '#c2 .drag:not(".selected")',
     });
     // with custom class
     $('#c2 .drag')
@@ -53,7 +52,7 @@
         }));
 
     var opts3 = $.extend({}, opts, {
-        appendGuideTo: '#c3 .drag:not(".selected")',
+        smartGuides: '#c3 .drag:not(".selected")',
         snap: '.snap-container',
         guideClass: 'guide'
     });
