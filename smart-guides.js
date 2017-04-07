@@ -160,7 +160,7 @@ SmartGuides.getClosestGuides = function (el, mockGuides, directionObj) {
 
     $.each(mockGuides, function () {
         var $this = $(this),
-            mockRect = IGuides.getRect($this),
+            mockRect = SmartGuides.getRect($this),
             leftDiff = Math.abs(directionObj.left ? (coords.left - mockRect.right) : (coords.right - mockRect.left)),
             topDiff = Math.abs(directionObj.top ? (coords.top - mockRect.bottom) : (coords.bottom - mockRect.top));
 
