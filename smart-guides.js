@@ -160,53 +160,30 @@ SmartGuides.getClosestGuides = function (el, mockGuides, directionObj) {
 
     $.each(mockGuides, function () {
         var $this = $(this),
-            leftDiff = Math.abs(coords.left - parseFloat($this.css('left'))),
-            topDiff = Math.abs(coords.top - parseFloat($this.css('top')));
+            mockRect = IGuides.getRect($this),
+            leftDiff = Math.abs(directionObj.left ? (coords.left - mockRect.right) : (coords.right - mockRect.left)),
+            topDiff = Math.abs(directionObj.top ? (coords.top - mockRect.bottom) : (coords.bottom - mockRect.top));
 
         $this.css('visibility', 'hidden');
 
         if ($this.hasClass(vClass)) {
-            if (directionObj.left) {
-                if (leftDiff < minLeft) {
-                    minLeft = leftDiff;
-                    if (vGuides[0]) {
-                        vGuides[0].css('visibility', 'hidden');
-                    }
-                    vGuides[0] = $this.css('visibility', '');
-                    // .push($this) if limitless
+            if (leftDiff < minLeft) {
+                minLeft = leftDiff;
+                if (vGuides[0]) {
+                    vGuides[0].css('visibility', 'hidden');
                 }
-            }
-            else {
-                if (leftDiff > maxLeft) {
-                    maxLeft = leftDiff;
-                    if (vGuides[0]) {
-                        vGuides[0].css('visibility', 'hidden');
-                    }
-                    vGuides[0] = $this.css('visibility', '');
-                    // .push($this) if limitless
-                }
+                vGuides[0] = $this.css('visibility', '');
+                // .push($this) if limitless
             }
         }
         else if ($this.hasClass(hClass)) {
-            if (directionObj.top) {
-                if (topDiff < minTop) {
-                    minTop = topDiff;
-                    if (hGuides[0]) {
-                        hGuides[0].css('visibility', 'hidden');
-                    }
-                    hGuides[0] = $this.css('visibility', '');
-                    // .push($this) if limitless
+            if (topDiff < minTop) {
+                minTop = topDiff;
+                if (hGuides[0]) {
+                    hGuides[0].css('visibility', 'hidden');
                 }
-            }
-            else {
-                if (topDiff > maxTop) {
-                    maxTop = topDiff;
-                    if (hGuides[0]) {
-                        hGuides[0].css('visibility', 'hidden');
-                    }
-                    hGuides[0] = $this.css('visibility', '');
-                    // .push($this) if limitless
-                }
+                hGuides[0] = $this.css('visibility', '');
+                // .push($this) if limitless
             }
         }
     });
