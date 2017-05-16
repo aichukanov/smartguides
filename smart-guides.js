@@ -151,9 +151,13 @@ SmartGuides.getClosestGuides = function (el, mockGuides, directionObj) {
         directionObj = { left: true, top: true, right: false, bottom: false };
     }
 
+    // IE has no these constants. So I need define it here. 
+    var MAX_SAFE_INTEGER = 9007199254740991,
+        MIN_SAFE_INTEGER = -9007199254740991;
+    
     // filter. We need max left and top elements.
-    var minLeft = Number.MAX_SAFE_INTEGER, minTop = Number.MAX_SAFE_INTEGER,
-        maxLeft = Number.MIN_SAFE_INTEGER, maxTop = Number.MIN_SAFE_INTEGER,
+    var minLeft = MAX_SAFE_INTEGER, minTop = MAX_SAFE_INTEGER,
+        maxLeft = MIN_SAFE_INTEGER, maxTop = MIN_SAFE_INTEGER,
         vGuides = [], hGuides = [];
 
     var coords = SmartGuides.getRect(el);
