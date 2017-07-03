@@ -13,6 +13,6 @@ Smart guides will be added to this selector.
 Custom class for smart guides
 <br />
 <br />
-You can see how it works on <a href="https://ready2.net/smartguides.html" target=_blank>ready2.net/smartguides</a>
+You can see how it works on <a href="https://ready2.net/smartguides" target=_blank>ready2.net/smartguides</a>
 
 Thanks to Alexander Polomoshnov for his "jQuery UI Resizable Snap".
