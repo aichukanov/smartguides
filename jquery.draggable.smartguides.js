@@ -38,7 +38,7 @@
     		    smartGuides = new SmartGuides({
     		        tolerance: settings.snapTolerance,
     		        guideClass: settings.guideClass,
-                    appendGuideTo: inst.options.smartGuides
+                    appendGuideTo: $this.siblings(inst.options.smartGuides)
     		    });
             }
 		},
