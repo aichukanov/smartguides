@@ -1,6 +1,8 @@
 # Smart guides
 jQueryUI smart guides for draggable and resizable elements.
 
+Live demo - https://aichukanov.github.io/smartguides/
+
 <h3>Options:</h3>
 
 <h4>smartGuides: true | false.</h4>
@@ -12,7 +14,5 @@ Smart guides will be added to this selector.
 <h4>guideClass: 'string'.</h4> 
 Custom class for smart guides
 <br />
-<br />
-You can see how it works on <a href="https://ready2.net/smartguides" target=_blank>neaty.net/smartguides</a>
 
 Thanks to Alexander Polomoshnov for his "jQuery UI Resizable Snap".
